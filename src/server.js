@@ -1,8 +1,10 @@
 require("express-async-errors");
+const express = require("express");
+
+const database = require("./database/sqlite");
 
 const AppError = require("./utils/AppError");
 //importar o express
-const express = require("express");
 
 const routes = require("./routes");
 
@@ -11,6 +13,8 @@ const app = express();
 app.use(express.json());
 
 app.use(routes);
+
+database();
 
 app.use((error, request, response, next) => {
   //Erro do lado do Cliente
